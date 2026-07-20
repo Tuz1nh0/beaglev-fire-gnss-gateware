@@ -110,6 +110,6 @@ append params " SLV_AXI4PRT_ADDRDEPTH:8"
 append params " SLV_AXI4PRT_DATADEPTH:9"
 
 # Create and configure the core
-create_and_configure_core -component_name {SHLS_AXI4Interconnect} -core_vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:*} -download_core -params $params
+create_and_configure_core -component_name {SHLS_AXI4Interconnect} -core_vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.100} -download_core -params $params
 
 puts "TCL_END: [info script]"

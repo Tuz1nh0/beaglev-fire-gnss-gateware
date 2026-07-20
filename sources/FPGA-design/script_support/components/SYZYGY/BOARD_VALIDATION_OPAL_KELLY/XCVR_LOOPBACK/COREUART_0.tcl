@@ -2,7 +2,7 @@
 # Family: PolarFire
 # Part Number: MPF300TS-1FCG1152I
 # Create and Configure the core component COREUART_0
-create_and_configure_core -core_vlnv Actel:DirectCore:COREUART:$COREUARTver -component_name {COREUART_0} -params {\
+create_and_configure_core -core_vlnv Actel:DirectCore:COREUART:5.7.100 -component_name {COREUART_0} -params {\
 "BAUD_VAL_FRCTN_EN:true"  \
 "RX_FIFO:0"  \
 "RX_LEGACY_MODE:0"  \

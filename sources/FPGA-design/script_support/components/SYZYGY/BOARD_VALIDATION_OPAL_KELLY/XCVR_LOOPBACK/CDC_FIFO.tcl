@@ -2,7 +2,7 @@
 # Family: PolarFire
 # Part Number: MPF300TS-1FCG1152I
 # Create and Configure the core component CDC_FIFO
-create_and_configure_core -core_vlnv Actel:DirectCore:COREFIFO:$COREFIFOver -component_name {CDC_FIFO} -params {\
+create_and_configure_core -core_vlnv Actel:DirectCore:COREFIFO:3.1.101 -component_name {CDC_FIFO} -params {\
 "AE_STATIC_EN:false"  \
 "AEVAL:4"  \
 "AF_STATIC_EN:false"  \
