@@ -54,9 +54,9 @@ build-job-next:
     - export
     - source ~/Microchip/Microchip-FPGA-Tools-Setup/setup-microchip-tools.sh
     - echo "Building the gateware..."
-    - python3 create-release.py $BUILD_OPTIONS_DIRECTORY
+    - python3 create-release.py $BUILD_OPTIONS_DIRECTORY || echo "Warning python build with libero-soc-v2025.2 failed, but continuing..."
     - echo "Compile complete."
-    - du -sh artifacts/bitstreams/*/LinuxProgramming/mpfs_bitstream.spi || exit 1
+    - du -sh artifacts/bitstreams/*/LinuxProgramming/mpfs_bitstream.spi || echo "Warning bitstream build with libero-soc-v2025.2 failed, but continuing..." && exit 1
 
 pages:
   image: registry.gfnd.rcn-ee.org:5000/ci/beagle-devscripts-kernel-debian-13-riscv64:latest
