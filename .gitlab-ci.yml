@@ -34,6 +34,30 @@ build-job:       # This job runs in the build stage, which runs first.
     reports:
       junit: artifacts/tests_report.xml
 
+build-job-next:
+  stage: build
+  allow_failure: true
+  tags:
+    - libero-soc-v2025.2
+  variables:
+    BUILD_OPTIONS_DIRECTORY: "custom-fpga-design"
+    REPO_UNDER_TEST: $CI_PROJECT_URL
+    BRANCH_UNDER_TEST: $CI_COMMIT_REF_NAME
+  rules:
+    - if: $CI_PROJECT_ROOT_NAMESPACE == "beaglev-fire"
+      variables:
+        BUILD_OPTIONS_DIRECTORY: "build-options"
+    - if: $CI_PROJECT_ROOT_NAMESPACE != "beaglev-fire"
+      # Use the default variables' values.
+        
+  script:
+    - export
+    - source ~/Microchip/Microchip-FPGA-Tools-Setup/setup-microchip-tools.sh
+    - echo "Building the gateware..."
+    - python3 create-release.py $BUILD_OPTIONS_DIRECTORY
+    - echo "Compile complete."
+    - du -sh artifacts/bitstreams/*/LinuxProgramming/mpfs_bitstream.spi || exit 1
+
 pages:
   image: robertcnelson/beagle-devscripts-kernel-debian-13-riscv64:latest
   # https://openbeagle.org/beagleboard/ci-docker-images
