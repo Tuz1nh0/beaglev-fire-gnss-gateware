@@ -59,7 +59,7 @@ build-job-next:
     - du -sh artifacts/bitstreams/*/LinuxProgramming/mpfs_bitstream.spi || exit 1
 
 pages:
-  image: robertcnelson/beagle-devscripts-kernel-debian-13-riscv64:latest
+  image: registry.gfnd.rcn-ee.org:5000/ci/beagle-devscripts-kernel-debian-13-riscv64:latest
   # https://openbeagle.org/beagleboard/ci-docker-images
   stage: deploy
   tags:
