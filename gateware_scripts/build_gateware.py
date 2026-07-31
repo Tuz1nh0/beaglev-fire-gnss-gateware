@@ -876,21 +876,72 @@ def make_hss(hss_source, build_options_input_yaml_file, board_options_input_yaml
 
             # Detect number of CPU cores
             num_cores = os.cpu_count()
-
-            # Print detected cores
             print(f"Detected {num_cores} cores.")
 
+            # Lets see what we have to work with...
+            SOFTCONSOLE = ("riscv64-unknown-elf-", shutil.which("riscv64-unknown-elf-gcc") is not None)
+            XPACK = ("riscv-none-elf-", shutil.which("riscv-none-elf-gcc") is not None)
+            if not SOFTCONSOLE[1] and not XPACK[1]:
+                raise RuntimeError("no toolchain found")
+
+            if SOFTCONSOLE[1] and XPACK[1]:
+                print("Have both compilers.")
+
+            # Determine what toolchain to ask for
+
+            # Does this project support selecting SoftConsole?
+            with open(os.path.join("application", "Kconfig.build"), encoding="utf-8") as f:
+                project_supports_xpack = any("CC_USE_SOFTCONSOLE" in line for line in f)
+
+            if project_supports_xpack:
+                with open(os.path.join("boards", board, "def_config"), "r", encoding="utf-8") as f:
+                    project_wants_softconsole = any(line.strip() == "CONFIG_CC_USE_SOFTCONSOLE=y" for line in f)
+            else:
+                project_wants_softconsole = False
+
+            #print(f"project_supports_xpack = {project_supports_xpack}")
+            #print(f"project_wants_softconsole = {project_wants_softconsole}")
+            #print(f"have_xpack = {XPACK[1]}")
+            #print(f"have_softconsole = {SOFTCONSOLE[1]}")
+
+            # Determine preferred order
+            if project_wants_softconsole:
+                candidates = [
+                    SOFTCONSOLE,
+                ]
+
+            elif project_supports_xpack:
+                candidates = [
+                    XPACK,
+                    SOFTCONSOLE,
+                ]
+
+            else:
+                candidates = [
+                    SOFTCONSOLE,
+                ]
+
+            # Pick the first available toolchain
+            for prefix, available in candidates:
+                if available:
+                    cross_compile = prefix
+                    break
+            else:
+                raise RuntimeError("no suitable toolchain found")
+
+
             if shutil.which("ccache"):
-                cross_compile = "\"ccache riscv64-unknown-elf-\""
+                cross_compile = f"\"ccache {cross_compile}\""
                 print("Will use ccache.")
             else:
-                cross_compile = "\"riscv64-unknown-elf-\""
+                cross_compile = f"\"{cross_compile}\""
 
             # Execute the make clean command if specified
             if make_clean:
                 clean_command = f"make clean BOARD={board}"
                 if verbose:
                     clean_command += " V=1"
+                print(f"$ {clean_command}")
                 exe_sys_cmd(clean_command)
 
             # Build command
@@ -899,6 +950,7 @@ def make_hss(hss_source, build_options_input_yaml_file, board_options_input_yaml
                 build_command += f" BOOTMODE={bootmode}"
             if verbose:
                 build_command += " V=1"
+            print(f"$ {build_command}")
             exe_sys_cmd(build_command)
 
         except Exception as e:
