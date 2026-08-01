@@ -263,40 +263,6 @@ new_project \
     -adv_options "VOLTR:$part_range"
 
 #
-# // Download required cores
-#
-
-try {
-	download_core -vlnv {Actel:SgCore:PF_OSC:1.0.102}                    -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SgCore:PF_CCC:2.2.220}                    -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SgCore:PF_CLK_DIV:1.0.103}                -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SgCore:PF_NGMUX:1.0.101}                  -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SgCore:PF_TX_PLL:2.0.304}                 -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SgCore:PF_XCVR_REF_CLK:1.0.103}           -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SgCore:PF_DRI:1.1.104}                    -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SgCore:PF_PCIE:2.0.121}                   -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SystemBuilder:PF_SRAM_AHBL_AXI:1.2.111}   -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SystemBuilder:PF_IOD_CDR:2.4.110}         -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SystemBuilder:PF_IOD_CDR_CCC:2.1.111}     -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:SystemBuilder:PF_DDR4:2.5.120}            -location {www.microchip-ip.com/repositories/SgCore}
-    download_core -vlnv {Actel:SystemBuilder:PF_XCVR_ERM:3.1.205}        -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Microsemi:SgCore:PFSOC_INIT_MONITOR:1.0.307}    -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:DirectCore:CORERESET_PF:2.3.100}          -location {www.microchip-ip.com/repositories/DirectCore}
-	download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.100}  -location {www.microchip-ip.com/repositories/DirectCore}
-	download_core -vlnv {Actel:DirectCore:CoreAPB3:4.2.100}              -location {www.microchip-ip.com/repositories/DirectCore}
-	download_core -vlnv {Actel:DirectCore:CoreGPIO:3.2.102}              -location {www.microchip-ip.com/repositories/DirectCore}
-	download_core -vlnv {Actel:DirectCore:COREAXI4DMACONTROLLER:2.2.107} -location {www.microchip-ip.com/repositories/DirectCore}
-	download_core -vlnv {Actel:DirectCore:corepwm:4.5.100}               -location {www.microchip-ip.com/repositories/DirectCore}
-	download_core -vlnv {Actel:DirectCore:COREI2C:7.2.101}               -location {www.microchip-ip.com/repositories/DirectCore}
-	download_core -vlnv {Actel:DirectCore:CoreUARTapb:5.7.100}           -location {www.microchip-ip.com/repositories/DirectCore}
-	download_core -vlnv {Microchip:MiV:MIV_IHC:2.0.100}                  -location {www.microchip-ip.com/repositories/DirectCore}
-	download_core -vlnv {Actel:Simulation:CLK_GEN:1.0.1}                 -location {www.microchip-ip.com/repositories/SgCore}
-	download_core -vlnv {Actel:Simulation:RESET_GEN:1.0.1}               -location {www.microchip-ip.com/repositories/SgCore}
-} on error err {
-	puts "Downloading cores failed, the script will continue but will fail if all of the required cores aren't present in the vault."
-}
-
-#
 # // Import I/O constraints
 #
 set import_pdc_files "-io_pdc \"./constraints/base_design.pdc\""
