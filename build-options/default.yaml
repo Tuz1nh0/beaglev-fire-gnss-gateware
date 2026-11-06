@@ -15,7 +15,8 @@ HSS:
 MSS:
     type: git
     local: sources/FPGA-design/mss.bundle
-    branch: default
+    branch: qspi
+    bypass: yes
 gateware:
     type: sources
     unique-design-version: 2.0.5

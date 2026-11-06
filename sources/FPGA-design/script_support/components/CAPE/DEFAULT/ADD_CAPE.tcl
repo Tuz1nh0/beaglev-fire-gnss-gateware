@@ -4,7 +4,8 @@ puts "======== Add cape option: DEFAULT ========"
 # Build cape's submodules
 #-------------------------------------------------------------------------------
 ::safe_source script_support/components/CAPE/shared/APB_BUS_CONVERTER.tcl
-::safe_source script_support/components/CAPE/shared/CoreAPB3_CAPE.tcl
+#::safe_source script_support/components/CAPE/shared/CoreAPB3_CAPE.tcl
+::safe_source script_support/components/CAPE/$cape_option/CoreAPB3_CAPE_config.tcl
 ::safe_source script_support/components/CAPE/shared/CoreGPIO_P8_UPPER.tcl
 ::safe_source script_support/components/CAPE/shared/P8_GPIO_UPPER.tcl
 ::safe_source script_support/components/CAPE/shared/CoreGPIO_P9.tcl
@@ -12,6 +13,9 @@ puts "======== Add cape option: DEFAULT ========"
 ::safe_source script_support/components/CAPE/shared/CAPE_DEFAULT_GPIOS.tcl
 ::safe_source script_support/components/CAPE/shared/CorePWM_C1.tcl
 ::safe_source script_support/components/CAPE/shared/CAPE_PWM.tcl
+::safe_source script_support/components/CAPE/$cape_option/blinky_config.tcl
+::safe_source script_support/components/CAPE/$cape_option/APB_Blinky_config.tcl
+::safe_source script_support/components/CAPE/$cape_option/APB_Blinky2_config.tcl
 ::safe_source script_support/components/CAPE/$cape_option/CAPE.tcl
 
 # Disable auto promotion of pins of type 'pad'

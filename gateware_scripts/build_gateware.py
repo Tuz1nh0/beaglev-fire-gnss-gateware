@@ -945,7 +945,14 @@ def make_hss(hss_source, build_options_input_yaml_file, board_options_input_yaml
                 exe_sys_cmd(clean_command)
 
             # Build command
-            build_command = f"make -j{num_cores} CROSS_COMPILE={cross_compile} BOARD={board}"
+            softconsole_dir = (os.environ.get("SC_INSTALL_DIR") or os.path.expanduser("~/Microchip/SoftConsole-v2022.2-RISC-V-747"))
+            
+            softconsole_gcc = os.path.join(softconsole_dir, "riscv-unknown-elf-gcc", "bin", "riscv64-unknown-elf-gcc")
+            
+            if not os.path.isfile(softconsole_gcc):
+            	raise RuntimeError(f"SoftConsole GCC não encontrado: {softconsole_gcc}")
+	    
+            build_command = f"make -j{num_cores} CC={softconsole_gcc} CROSS_COMPILE={cross_compile} BOARD={board}"
             if bootmode:
                 build_command += f" BOOTMODE={bootmode}"
             if verbose:
@@ -1008,7 +1015,7 @@ def make_hss(hss_source, build_options_input_yaml_file, board_options_input_yaml
 
             return selected_hex_file
         else:
-            raise Exception("!!! Error: Hart Soft Service build failed !!!", flush=True)
+            raise Exception("!!! Error: Hart Soft Service build failed !!!", flush = True)
 
     else:
         print("Error: Unknown HSS type specified.")
@@ -1039,7 +1046,7 @@ def get_libero_script_args(build_options_yaml_path, board_options_yaml_path=None
             print(f"Error reading or parsing board options YAML: {e}")
     else:
         libero_script_args += f" BOARD:mpfs-beaglev-fire"
-
+        
     if libero_script_args is None:
         libero_script_args = "NONE"
     return libero_script_args
