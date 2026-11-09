@@ -16,6 +16,13 @@ puts "======== Add cape option: DEFAULT ========"
 ::safe_source script_support/components/CAPE/$cape_option/blinky_config.tcl
 ::safe_source script_support/components/CAPE/$cape_option/APB_Blinky_config.tcl
 ::safe_source script_support/components/CAPE/$cape_option/APB_Blinky2_config.tcl
+
+
+::safe_source script_support/components/CAPE/$cape_option/GNSS_DDS_C0_config.tcl
+#::safe_source script_support/components/CAPE/$cape_option/GNSS_CLK_DIV_C0_config.tcl
+#::safe_source script_support/components/CAPE/$cape_option/GNSS_CCC_C0_config.tcl
+::safe_source script_support/components/CAPE/$cape_option/GNSS_MAX2771_signal_config.tcl
+
 ::safe_source script_support/components/CAPE/$cape_option/CAPE.tcl
 
 # Disable auto promotion of pins of type 'pad'
