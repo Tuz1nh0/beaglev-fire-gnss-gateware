@@ -19,6 +19,6 @@ MSS:
     bypass: yes
 gateware:
     type: sources
-    build-args: "CAPE_OPTION:DEFAULT
+    build-args: "CAPE_OPTION:GNSS
                    M2_OPTION:NONE"
     unique-design-version: 2.0.5
