@@ -1,0 +1,29 @@
+
+22:35:14 INFO  - Selected boot mode "1 - non-secure boot from eNVM" and working in directory "/home/renato/Documents/gateware_Blinky/sources/HSS/build".
+22:35:14 DEBUG - Workdir=/home/renato/Documents/gateware_Blinky/sources/HSS/build die=MPFS025T diePackage=FCVG484 bm=1 - non-secure boot from eNVM verify=false elf=hss-envm-wrapper.elf
+22:35:14 DEBUG - Invoking command: "/home/renato/Microchip/Libero_SoC_2025.1/Libero_SoC/Designer/bin64/fpgenprog new_project --location /home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/fpgenprogProject --target_die MPFS025T --target_package FCVG484".
+22:35:14 DEBUG - Finished with exit code: "0".
+22:35:14 INFO  - Generating BIN file...
+22:35:14 DEBUG - Invoking command: "/home/renato/Microchip/SoftConsole-v2022.2-RISC-V-747/riscv-unknown-elf-gcc/bin/riscv64-unknown-elf-objcopy --version".
+22:35:14 DEBUG - Finished with exit code: "0".
+22:35:14 DEBUG - Invoking command: "/home/renato/Microchip/SoftConsole-v2022.2-RISC-V-747/riscv-unknown-elf-gcc/bin/riscv64-unknown-elf-objcopy -O binary /home/renato/Documents/gateware_Blinky/sources/HSS/build/hss-envm-wrapper.elf /home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/hss-envm-wrapper.bin ".
+22:35:14 DEBUG - Finished with exit code: "0".
+22:35:14 DEBUG - Size of the BIN file is "102544 (decimal)" or "0x00019090 (hex)".
+22:35:14 DEBUG - Invoking command: "/home/renato/Microchip/SoftConsole-v2022.2-RISC-V-747/riscv-unknown-elf-gcc/bin/riscv64-unknown-elf-readelf --program-headers /home/renato/Documents/gateware_Blinky/sources/HSS/build/hss-envm-wrapper.elf ".
+22:35:14 DEBUG - Finished with exit code: "0".
+22:35:14 DEBUG - Entry point 0x20220100
+22:35:14 DEBUG - The detected entry address is "20220100".
+22:35:14 INFO  - Generating header...
+22:35:14 INFO  - Generating HEX file...
+22:35:14 DEBUG - Invoking command: "/home/renato/Microchip/SoftConsole-v2022.2-RISC-V-747/riscv-unknown-elf-gcc/bin/riscv64-unknown-elf-objcopy -I binary -O ihex --change-section-lma *+0x20220000 /home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/hss-envm-wrapper-bm1-p0.bin /home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/hss-envm-wrapper-bm1-p0.hex ".
+22:35:14 DEBUG - Finished with exit code: "0".
+22:35:14 INFO  - Preparing for bitstream generation...
+22:35:14 DEBUG - Invoking command: "/home/renato/Microchip/Libero_SoC_2025.1/Libero_SoC/Designer/bin64/fpgenprog mss_boot_info --location /home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/fpgenprogProject --u_mss_bootmode 1 --u_mss_bootcfg 2022010020220100202201002022010020220100".
+22:35:14 DEBUG - Finished with exit code: "0".
+22:35:14 DEBUG - Invoking command: "/home/renato/Microchip/Libero_SoC_2025.1/Libero_SoC/Designer/bin64/fpgenprog envm_client --location /home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/fpgenprogProject --number_of_bytes 102800 --content_file_format intel-hex --content_file /home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/hss-envm-wrapper-bm1-p0.hex --start_page 0 --client_name bootmode1_0 --mem_file_base_address 20220000".
+22:35:15 DEBUG - Finished with exit code: "0".
+22:35:15 INFO  - Generating bitstream...
+22:35:15 DEBUG - Invoking command: "/home/renato/Microchip/Libero_SoC_2025.1/Libero_SoC/Designer/bin64/fpgenprog generate_bitstream --location /home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/fpgenprogProject".
+22:35:22 DEBUG - Finished with exit code: "0".
+22:35:22 INFO  - Programming/verifying the target skipped because --dryrun was specified.
+22:35:22 INFO  - mpfsBootmodeProgrammer completed successfully.

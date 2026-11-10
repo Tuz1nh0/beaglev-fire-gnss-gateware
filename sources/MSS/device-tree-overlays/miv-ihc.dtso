@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/* Copyright (c) 2020-2025 Microchip Technology Inc */
+
+/dts-v1/;
+/plugin/;
+
+&{/chosen} {
+	overlays {
+		MIV-IHC = "GATEWARE_GIT_VERSION";
+	};
+};
+
+&{/} {
+	#address-cells = <0x2>;
+	#size-cells = <0x2>;
+
+	ihc: mailbox@50000000 {
+		compatible = "microchip,sbi-ipc", "microchip,miv-ihc-rtl-v2";
+		reg = <0x0 0x50000000 0x0 0x1c000>;
+		microchip,ihc-chan-disabled-mask = /bits/ 16 <0>;
+		interrupt-parent = <&plic>;
+		interrupts = <177>, <178>, <179>, <180>;
+		interrupt-names = "hart-1", "hart-2", "hart-3", "hart-4";
+		#mbox-cells = <1>;
+		status = "okay";
+	};
+};

@@ -1,0 +1,14 @@
+Software Version: 2025.1.0.14
+Opened '/home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/fpgenprogProject/proj_fp/proj_fp.pro'
+PDB file '/home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/fpgenprogProject/target.pdb' has been loaded successfully.
+DESIGN : TOP;  CHECKSUM : 0000;  PDB_VERSION : 1.9
+Info: Programming Interface selected is JTAG.
+Info: Design version: 0
+File/Folder '/home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/fpgenprogProject/proj_fp/target.ppd' will be overwritten.
+Successfully exported PPD file for currently secured device: '/home/renato/Documents/gateware_Blinky/sources/HSS/build/bootmode1/fpgenprogProject/proj_fp/target.ppd'; file programs eNVM.
+eNVM component bitstream digest: 60471cabbeb6b47ccaa42076ca35acdce0010dfb7c6112bd4dbb9e61aa803a83
+Entire bitstream digest: 9c2c70db8ee71e94849073afa3d0dd29ee5ab28787c1540373627d5160ac08ec
+Finished: Sun Nov  8 22:35:22 2026 (Elapsed time 00:00:03)
+
+Project saved.
+Project closed.

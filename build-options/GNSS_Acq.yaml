@@ -20,6 +20,5 @@ MSS:
 gateware:
     type: sources
     build-args: "CAPE_OPTION:DEFAULT
-                   M2_OPTION:NONE
-                  APU_OPTION:PICO_RV"
+                   M2_OPTION:NONE"
     unique-design-version: 2.0.5

@@ -99,6 +99,16 @@ sd_create_pin_slices -sd_name ${sd_name} -pin_name {P8} -pin_slices {[6:6]}
 sd_create_pin_slices -sd_name ${sd_name} -pin_name {P8} -pin_slices {[7:7]}
 sd_create_pin_slices -sd_name ${sd_name} -pin_name {P8} -pin_slices {[8:8]}
 sd_create_pin_slices -sd_name ${sd_name} -pin_name {P8} -pin_slices {[9:9]}
+# Add ACQ_MOD_GPIO_IN_0 instance
+sd_instantiate_hdl_core -sd_name ${sd_name} -hdl_core_name {ACQ_MOD_GPIO_IN} -instance_name {ACQ_MOD_GPIO_IN_0}
+
+
+
+# Add Acquisition_Core_0 instance
+sd_instantiate_hdl_core -sd_name ${sd_name} -hdl_core_name {Acquisition_Core} -instance_name {Acquisition_Core_0}
+
+
+
 # Add APB_Blinky2_0 instance
 sd_instantiate_hdl_core -sd_name ${sd_name} -hdl_core_name {APB_Blinky2} -instance_name {APB_Blinky2_0}
 
@@ -189,10 +199,12 @@ sd_instantiate_component -sd_name ${sd_name} -component_name {CAPE_PWM} -instanc
 
 
 # Add scalar net connections
+sd_connect_pins -sd_name ${sd_name} -pin_names {"ACQ_MOD_GPIO_IN_0:MOD_GPIO_ACQ_CLK" "Acquisition_Core_0:MAX_INPUT_CLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"APB_Blinky2_0:LED_OUT" "blinky_0:LED_APB2_VHD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"APB_Blinky2_0:PCLK" "APB_Blinky_0:PCLK" "GNSS_MAX2771_signal_0:PCLK" "P8_GPIO_UPPER_0:PCLK" "P9_GPIO_0:PCLK" "PCLK" "PWM_0:PCLK" "PWM_1:PCLK" "PWM_2:PCLK" "blinky_0:clk" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"APB_Blinky2_0:PRESETN" "APB_Blinky_0:PRESETN" "GNSS_MAX2771_signal_0:PRESETN" "P8_GPIO_UPPER_0:PRESETN" "P9_GPIO_0:PRESETN" "PRESETN" "PWM_0:PRESETN" "PWM_1:PRESETN" "PWM_2:PRESETN" "blinky_0:resetn" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"APB_Blinky2_0:PCLK" "APB_Blinky_0:PCLK" "Acquisition_Core_0:CLK" "GNSS_MAX2771_signal_0:PCLK" "P8_GPIO_UPPER_0:PCLK" "P9_GPIO_0:PCLK" "PCLK" "PWM_0:PCLK" "PWM_1:PCLK" "PWM_2:PCLK" "blinky_0:clk" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"APB_Blinky2_0:PRESETN" "APB_Blinky_0:PRESETN" "Acquisition_Core_0:NRST" "GNSS_MAX2771_signal_0:PRESETN" "P8_GPIO_UPPER_0:PRESETN" "P9_GPIO_0:PRESETN" "PRESETN" "PWM_0:PRESETN" "PWM_1:PRESETN" "PWM_2:PRESETN" "blinky_0:resetn" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"APB_Blinky_0:LED_OUT" "blinky_0:LED_APB" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Acquisition_Core_0:CA_CLKx4" "GNSS_MAX2771_signal_0:OCLK" "GNSS_RCOSC_160MHZ_GL" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE_DEFAULT_GPIOS:GPIO_0_PAD" "P8[3:3]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE_DEFAULT_GPIOS:GPIO_11_PAD" "P8[14:14]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE_DEFAULT_GPIOS:GPIO_12_PAD" "P8[15:15]" }
@@ -219,7 +231,6 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE_DEFAULT_GPIOS:GPIO_6_PAD" 
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE_DEFAULT_GPIOS:GPIO_7_PAD" "P8[10:10]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE_DEFAULT_GPIOS:GPIO_8_PAD" "P8[11:11]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE_DEFAULT_GPIOS:GPIO_9_PAD" "P8[12:12]" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"GNSS_MAX2771_signal_0:OCLK" "GNSS_RCOSC_160MHZ_GL" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GNSS_MAX2771_signal_0:PLL_LOCK" "GNSS_PLL_LOCK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GNSS_MAX2771_signal_0:VALID_OUT" "blinky_0:GNSS_PRN_VALID" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_13_BIBUF:D" "PWM_2:PWM_1" }
@@ -256,7 +267,10 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"P9_GPIO_0:GPIO_4_PAD" "P9_PIN15
 sd_connect_pins -sd_name ${sd_name} -pin_names {"P9_PIN42" "PWM_0:PWM_0" }
 
 # Add bus net connections
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE_DEFAULT_GPIOS:GPIO_IN" "GPIO_IN" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"ACQ_MOD_GPIO_IN_0:GPIO_IN" "CAPE_DEFAULT_GPIOS:GPIO_IN" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"ACQ_MOD_GPIO_IN_0:MOD_GPIO_ACQ_I" "Acquisition_Core_0:MAX_INPUT_I" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"ACQ_MOD_GPIO_IN_0:MOD_GPIO_ACQ_Q" "Acquisition_Core_0:MAX_INPUT_Q" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"ACQ_MOD_GPIO_IN_0:MOD_GPIO_IN" "GPIO_IN" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE_DEFAULT_GPIOS:GPIO_OE" "blinky_0:modified_gpio_enable" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE_DEFAULT_GPIOS:GPIO_OUT" "blinky_0:modified_gpio" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GNSS_MAX2771_signal_0:I_OUT" "blinky_0:GNSS_I" }
@@ -271,6 +285,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"APB_BUS_CONVERTER_0:APB_MASTER"
 sd_connect_pins -sd_name ${sd_name} -pin_names {"APB_BUS_CONVERTER_0:APB_SLAVE" "APB_SLAVE" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"APB_Blinky2_0:BIF_1" "CoreAPB3_CAPE_0:APBmslave6" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"APB_Blinky_0:BIF_1" "CoreAPB3_CAPE_0:APBmslave3" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Acquisition_Core_0:BIF_1" "CoreAPB3_CAPE_0:APBmslave8" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CoreAPB3_CAPE_0:APBmslave0" "PWM_0:APBslave" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CoreAPB3_CAPE_0:APBmslave1" "P8_GPIO_UPPER_0:APB_bif" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CoreAPB3_CAPE_0:APBmslave2" "P9_GPIO_0:APB_bif" }
