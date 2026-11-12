@@ -49,7 +49,7 @@ architecture Behavioral of DDS_PNFreq is
     signal sin_neg_signal : std_logic_vector(SINCOS_WIDTH-1 downto 0);
 
     --- DDS component declaration
-    component COREDDS_C0 is
+    component MAX_COREDDS_C0 is
         port(
             CLK            : in  std_logic;
             FREQ_OFFSET    : in  std_logic_vector(Freq_OFF_WIDTH-1 downto 0);
@@ -77,7 +77,7 @@ architecture Behavioral of DDS_PNFreq is
 begin
 
         -- DDS e contador 
-    SINE_GENERATOR: COREDDS_C0 port map (
+    SINE_GENERATOR: MAX_COREDDS_C0 port map (
         CLK             => CLK,
         FREQ_OFFSET     => FREQ_OFFSET,
         FREQ_OFFSET_WE  => '1',

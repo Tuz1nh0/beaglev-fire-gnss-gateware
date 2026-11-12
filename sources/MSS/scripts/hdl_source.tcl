@@ -42,9 +42,7 @@ foreach file [glob -nocomplain -type f [file join $current_dir "script_support" 
     import_files -convert_EDN_to_HDL 0 -library {work} -hdl_source $file
 }
 
-foreach file [glob -nocomplain -type f [file join $current_dir "script_support" "components" "CAPE" $cape_option "HDL" "GNSS_MAX2771_sig_generator" "L1_Code_Generator" "*.vhd"]] {
-    import_files -convert_EDN_to_HDL 0 -library {work} -hdl_source $file
-}
+::safe_source script_support/components/CAPE/$cape_option/hdl_cape_import.tcl
 
 build_design_hierarchy 
 
