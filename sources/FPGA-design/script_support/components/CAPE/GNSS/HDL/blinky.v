@@ -6,6 +6,7 @@ input	LED_APB,
 input	LED_APB2_VHD,
 input   [1:0] GNSS_I,
 input   [1:0] GNSS_Q,
+input   BUTTON_LED,
 input   GNSS_PRN_VALID,
 input [27:0] gpio_out,
 input [27:0] gpio_enable,
@@ -14,8 +15,8 @@ output [27:0] modified_gpio_enable
 );
 
 reg [22:0] counter;
-assign modified_gpio = {gpio_out[27:25], GNSS_PRN_VALID, GNSS_Q, GNSS_I, gpio_out[19:8], LED_APB2_VHD, LED_APB, counter[22], gpio_out[4:0]};
-assign modified_gpio_enable = {gpio_enable[27:25], 5'b1, gpio_enable[19:8], 1'b1, 1'b1, 1'b1, gpio_enable[4:0]};
+assign modified_gpio = {gpio_out[27:25], GNSS_PRN_VALID, GNSS_Q, GNSS_I, gpio_out[19:12], BUTTON_LED, gpio_out[10:8], LED_APB2_VHD, LED_APB, counter[22], gpio_out[4:0]};
+assign modified_gpio_enable = {gpio_enable[27:25], 5'b1, gpio_enable[19], 5'b0 ,gpio_enable[13:12], 1'b1, gpio_enable[10:8], 1'b1, 1'b1, 1'b1, gpio_enable[4:0]};
 
 always@(posedge clk or negedge resetn)
 begin
@@ -29,3 +30,4 @@ begin
         end
 end
 endmodule
+

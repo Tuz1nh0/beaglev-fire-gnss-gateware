@@ -146,24 +146,26 @@ begin
             SINE        => DDS_out(1)
     );
     
-    process (PRN_CLKx4, NRST)
+    process (PRN_CLKx4, NRST, enable, PLL_LOCK)
     begin
-        if NRST = '0' then
-            I_OUT <= "00";
-            Q_OUT <= "00";
-            VALID_OUT <= '0';
-            
-        elsif PRN_CLKx4 = '1' and PRN_CLKx4'event then
-            if enable = '1' and PLL_LOCK = '1' then
+        if rising_edge(PRN_CLKx4) then
+            if NRST = '0' then
+                I_OUT <= "00";
+                Q_OUT <= "00";
+            elsif enable = '1' and PLL_LOCK = '1' then
                 I_OUT(1) <= DDS_out(0)(4) xor CA_CODE;
                 I_OUT(0) <= (DDS_out(0)(4) xor DDS_out(0)(3)) or (DDS_out(0)(4) xor DDS_out(0)(2));
                 
                 Q_OUT(1) <= DDS_out(1)(4) xor CA_CODE;
                 Q_OUT(0) <= (DDS_out(1)(4) xor DDS_out(1)(3)) or (DDS_out(1)(4) xor DDS_out(1)(2)); 
-     
-                VALID_OUT <= PRN_CLKx4;
-            end if;
+            end if;                    
         end if;
     end process;
+    
+    VALID_OUT <= PRN_CLKx4 when enable = '1'
+                else '0';
+
+    
 end architecture_MAX2771_DDS_signal;
+
 

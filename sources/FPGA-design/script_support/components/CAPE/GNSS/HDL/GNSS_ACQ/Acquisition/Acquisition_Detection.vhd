@@ -144,7 +144,7 @@ architecture architecture_Acquisition_Detection of Acquisition_Detection is
     );
     end component;
     
-    component complex_multiplier_C2 is
+    component ACQ_complex_multiplier_C2 is
     -- Port list
     port(
         -- Inputs
@@ -165,7 +165,7 @@ begin
     CONJ_Y: entity work.Negative_Integer generic map(data_width => 16) 
         port map(SIG_IN  => Y_IN, SIG_OUT => Y_IN_NEG);
     
-    ABS_CALC: complex_multiplier_C2 port map (Y_IN, X_IN, Y_IN_NEG, X_IN, clk, NRST, open, abs_squared);
+    ABS_CALC: ACQ_complex_multiplier_C2 port map (Y_IN, X_IN, Y_IN_NEG, X_IN, clk, NRST, open, abs_squared);
     
     clkd(0) <= VALID_IN;
     CLK_MULT_D: for i in 0 to 3 generate

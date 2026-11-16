@@ -269,7 +269,7 @@ source script_support/components/APU/$apu_option/ADD_APU.tcl
 
 #-------------------------------------------------------------------------------
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_PLL_LOCK" "CLOCKS_AND_RESETS:GNSS_PLL_LOCK_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_RCOSC_160MHZ_GL" "CLOCKS_AND_RESETS:GNSS_OUT0_FABCLK" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_PRN_CLKx4" "CLOCKS_AND_RESETS:GNSS_OUT0_FABCLK" }
 
 # Re-enable auto promotion of pins of type 'pad'
 auto_promote_pad_pins -promote_all 1

@@ -24,23 +24,23 @@ use IEEE.numeric_std.all;
 entity Acquisition_Core is
 port (
 	CLK             : IN  std_logic; -- example
-    CA_CLKx4        : IN  std_logic;
-    NRST            : IN  std_logic;
+    	CA_CLKx4        : IN  std_logic;
+    	NRST            : IN  std_logic;
 	MAX_INPUT_I     : IN  std_logic_vector(1 downto 0); -- MAX INPUT IN PHASE SIGNAL
-    MAX_INPUT_Q     : IN  std_logic_vector(1 downto 0); -- MAX INPUT QUADRATURE SIGNAL
-    MAX_INPUT_CLK   : IN  std_logic; -- MAX INPUT CLOCK      
-    -- APB3 slave interface
-    PSEL    : in std_logic;
-    PENABLE : in std_logic;
-    PWRITE  : in std_logic;
-    PADDR   : in std_logic_vector(31 downto 0);
-    PWDATA  : in std_logic_vector(31 downto 0);
-    PRDATA  : out std_logic_vector(31 downto 0);
-    PREADY  : out std_logic;
-    PSLVERR : out std_logic;
+    	MAX_INPUT_Q     : IN  std_logic_vector(1 downto 0); -- MAX INPUT QUADRATURE SIGNAL
+    	MAX_INPUT_CLK   : IN  std_logic; -- MAX INPUT CLOCK      
+    	-- APB3 slave interface
+    	PSEL    : in std_logic;
+    	PENABLE : in std_logic;
+    	PWRITE  : in std_logic;
+    	PADDR   : in std_logic_vector(31 downto 0);
+    	PWDATA  : in std_logic_vector(31 downto 0);
+    	PRDATA  : out std_logic_vector(31 downto 0);
+    	PREADY  : out std_logic;
+    	PSLVERR : out std_logic;
 
-    -- Optional interrupt
-    IRQ : out std_logic
+    	-- Optional interrupt
+    	IRQ : out std_logic
 );
 end Acquisition_Core;
 architecture architecture_Acquisition_Core of Acquisition_Core is

@@ -71,7 +71,7 @@ architecture architecture_FFT_Correlator of FFT_Correlator is
     signal  IM, QM              : std_logic_vector(2*INPUT_WIDTH downto 0);
     signal  IY, QY              : std_logic_vector(2*INPUT_WIDTH-1 downto 0);
     
-    component COREFFT_C2 is -- In-Place FFT
+    component ACQ_COREFFT_C2 is -- In-Place FFT
     port(
         -- Inputs
         CLK         : in  std_logic;
@@ -120,7 +120,7 @@ architecture architecture_FFT_Correlator of FFT_Correlator is
     );
     end component;
     
-    component COREFFT_C4 is -- In-Place FFT
+    component ACQ_COREFFT_C4 is -- In-Place FFT
     port(
         -- Inputs
         CLK         : in  std_logic;
@@ -139,7 +139,7 @@ architecture architecture_FFT_Correlator of FFT_Correlator is
     );
     end component;
 
-    component complex_multiplier_C0 is
+    component ACQ_complex_multiplier_C0 is
     -- Port list
     port(
         --Inputs
@@ -163,7 +163,7 @@ begin
         port map(clk, NGRST, slw_clk);    
  
  --FFT
-    FFT_IQ : COREFFT_C2
+    FFT_IQ : ACQ_COREFFT_C2
 	port map (
 	    CLK         => clk,                -- clock de processamento
 	    DATAI_IM    => Q1_IN, -- parte imaginaria (Q)
@@ -179,7 +179,7 @@ begin
 	    OUTP_READY  => OutReady(0)
 	);
 		
-    FFT_CA: COREFFT_C2
+    FFT_CA: ACQ_COREFFT_C2
 	port map (
 	    CLK         => clk,                -- clock de processamento
 	    DATAI_IM    => Q2_IN, -- parte imaginaria (Q)
@@ -199,7 +199,7 @@ begin
         port map(SIG_IN  => QX2, SIG_OUT => QX2n);
         
     -- Correlação
-    MULT5: complex_multiplier_C0 port map (
+    MULT5: ACQ_complex_multiplier_C0 port map (
             aimag_i     => QX1,     areal_i     => IX1, 
             bimag_i     => QX2n,    breal_i     => IX2, 
             clock_i     => clk,     nreset_i    => MULT_RST, 
@@ -213,7 +213,7 @@ begin
     QY <= QM(2*INPUT_WIDTH-1 downto 0);
     IY <= IM(2*INPUT_WIDTH-1 downto 0);
                                             
-    IFFT: COREFFT_C4
+    IFFT: ACQ_COREFFT_C4
 	port map (
 	    CLK         => clk,     -- clock de processamento
 	    DATAI_IM    => QY,      -- parte imaginaria (Q)
