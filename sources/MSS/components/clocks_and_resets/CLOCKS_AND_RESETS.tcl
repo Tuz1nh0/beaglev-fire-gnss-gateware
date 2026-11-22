@@ -20,7 +20,7 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {FIC_2_FABRIC_RESET_N} -por
 sd_create_scalar_port -sd_name ${sd_name} -port_name {FIC_3_FABRIC_RESET_N} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {FIC_3_PCLK} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GNSS_OUT0_FABCLK} -port_direction {OUT}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GNSS_PLL_LOCK_0} -port_direction {OUT}
+#sd_create_scalar_port -sd_name ${sd_name} -port_name {GNSS_PLL_LOCK_0} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RCOSC_160MHZ_GL} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {XCVR_INIT_DONE} -port_direction {OUT}
 
@@ -77,6 +77,8 @@ sd_instantiate_component -sd_name ${sd_name} -component_name {FPGA_CCC_C0} -inst
 
 # Add GNSS_CCC_C0_0 instance
 sd_instantiate_component -sd_name ${sd_name} -component_name {GNSS_CCC_C0} -instance_name {GNSS_CCC_C0_0}
+sd_mark_pins_unused -sd_name ${sd_name} -pin_names {GNSS_CCC_C0_0:PLL_LOCK_0}
+sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {GNSS_CCC_C0_0:PLL_POWERDOWN_N_0} -value {VCC}
 
 
 
@@ -116,7 +118,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_0_ACLK" "FIC_0_RESET:CLK" "
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_0_FABRIC_RESET_N" "FIC_0_RESET:FABRIC_RESET_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_0_RESET:FPGA_POR_N" "FIC_1_RESET:FPGA_POR_N" "FIC_2_RESET_0:FPGA_POR_N" "FIC_3_RESET_0:FPGA_POR_N" "INIT_MONITOR_0:FABRIC_POR_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_0_RESET:PLL_LOCK" "FIC_1_RESET:PLL_LOCK" "FIC_2_RESET_0:PLL_LOCK" "FIC_3_RESET_0:PLL_LOCK" "FIC_PLL_LOCKs:Y" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_0_RESET:PLL_POWERDOWN_B" "FPGA_CCC_C0_0:PLL_POWERDOWN_N_0" "GNSS_CCC_C0_0:PLL_POWERDOWN_N_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_0_RESET:PLL_POWERDOWN_B" "FPGA_CCC_C0_0:PLL_POWERDOWN_N_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_1_ACLK" "FIC_1_RESET:CLK" "FPGA_CCC_C0_0:OUT1_FABCLK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_1_FABRIC_RESET_N" "FIC_1_RESET:FABRIC_RESET_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_2_ACLK" "FIC_2_RESET_0:CLK" "FPGA_CCC_C0_0:OUT2_FABCLK_0" }
@@ -127,7 +129,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_PLL_LOCKs:A" "FPGA_CCC_C0_0
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_PLL_LOCKs:B" "MSS_DLL_LOCKS" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FPGA_CCC_C0_0:REF_CLK_0" "GNSS_CCC_C0_0:REF_CLK_0" "OSCILLATOR_160MHz:RCOSC_160MHZ_GL" "PF_CCC_ADC_0:REF_CLK_0" "RCOSC_160MHZ_GL" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GNSS_CCC_C0_0:OUT0_FABCLK_0" "GNSS_OUT0_FABCLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"GNSS_CCC_C0_0:PLL_LOCK_0" "GNSS_PLL_LOCK_0" }
+#sd_connect_pins -sd_name ${sd_name} -pin_names {"GNSS_CCC_C0_0:PLL_LOCK_0" "GNSS_PLL_LOCK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"INIT_MONITOR_0:XCVR_INIT_DONE" "XCVR_INIT_DONE" }
 
 

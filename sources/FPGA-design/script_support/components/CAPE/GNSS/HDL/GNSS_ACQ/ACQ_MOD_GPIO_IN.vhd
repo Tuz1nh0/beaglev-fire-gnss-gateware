@@ -33,8 +33,9 @@ end ACQ_MOD_GPIO_IN;
 architecture architecture_ACQ_MOD_GPIO_IN of ACQ_MOD_GPIO_IN is
 begin
 	MOD_GPIO_IN 		<= 	GPIO_IN;
-	MOD_GPIO_ACQ_CLK	<=   	GPIO_IN(18);
-	MOD_GPIO_ACQ_I	    <=   	GPIO_IN(17 downto 16);
-	MOD_GPIO_ACQ_Q	    <=   	GPIO_IN(15 downto 14);
+	MOD_GPIO_ACQ_CLK	<=   	GPIO_IN(24);
+	MOD_GPIO_ACQ_I	    <=   	GPIO_IN(23 downto 22);
+	MOD_GPIO_ACQ_Q	    <=   	GPIO_IN(21 downto 20);
 end architecture_ACQ_MOD_GPIO_IN;
+
 

@@ -39,6 +39,7 @@ port (
         PSLVERR : out std_logic;
         
         -- Interface MAX2771
+        Debug_port	: in std_logic_vector(31 downto 0);
         enable          : out std_logic;
         Doppler_step    : out std_logic_vector(5 downto 0);    
         SAT_int         : out std_logic_vector(4 downto 0)
@@ -49,6 +50,7 @@ architecture architecture_MAX2771_APB_Wrapper of MAX2771_APB_Wrapper is
     signal reg_enable   : std_logic_vector(31 downto 0);
     signal reg_doppler  : std_logic_vector(31 downto 0);
     signal reg_sat_id   : std_logic_vector(31 downto 0);
+    signal reg_debug   : std_logic_vector(31 downto 0);
     
     -- Seleção de escrita APB
     signal write_en : std_logic;
@@ -97,7 +99,8 @@ begin
         reg_enable   when x"00",
         reg_doppler  when x"04",
         reg_sat_id   when x"08",
-        x"B11A2026"                         when x"0C",
+        reg_debug    when x"0C",
+        x"B11A2026"                         when x"10",
         (others => '0')                     when others;
     ---------------------------------------------------
     --- OUTPUTS
@@ -105,5 +108,6 @@ begin
     enable  <= reg_enable(0);
     Doppler_step <= reg_doppler(Doppler_step'high downto Doppler_step'low);
     SAT_int <= reg_sat_id(SAT_int'high downto SAT_int'low);
+    reg_debug <= Debug_port;
     
 end architecture_MAX2771_APB_Wrapper;

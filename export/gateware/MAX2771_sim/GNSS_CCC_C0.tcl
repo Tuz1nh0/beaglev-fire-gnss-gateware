@@ -39,7 +39,7 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_na
 "GL0_0_BYPASS:0"  \
 "GL0_0_BYPASS_EN:false"  \
 "GL0_0_DEDICATED_USED:false"  \
-"GL0_0_DIV:12"  \
+"GL0_0_DIV:76"  \
 "GL0_0_DIVSTART:0"  \
 "GL0_0_DYNAMIC_PH:false"  \
 "GL0_0_EXPOSE_EN:false"  \
@@ -160,7 +160,7 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_na
 "GL3_1_PHASE_SEL:false"  \
 "GL3_1_PLL_PHASE:0"  \
 "PLL_ALLOW_CCC_EXT_FB:false"  \
-"PLL_BANDWIDTH_0:2"  \
+"PLL_BANDWIDTH_0:0"  \
 "PLL_BANDWIDTH_1:1"  \
 "PLL_BYPASS_GO_B_0:false"  \
 "PLL_BYPASS_GO_B_1:false"  \

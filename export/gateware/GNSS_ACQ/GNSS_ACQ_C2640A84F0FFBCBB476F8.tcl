@@ -1,5 +1,5 @@
-# Creating SmartDesign "GNSS_ACQ_C2640A84F0FFBCBB476F8"
-set sd_name {GNSS_ACQ_C2640A84F0FFBCBB476F8}
+# Creating SmartDesign "GNSS_ACQ_A942CE3A95AD1C5FA84BF"
+set sd_name {GNSS_ACQ_A942CE3A95AD1C5FA84BF}
 create_smartdesign -sd_name ${sd_name}
 
 # Disable auto promotion of pins of type 'pad'
@@ -8,13 +8,6 @@ auto_promote_pad_pins -promote_all 0
 # Create top level Scalar Ports
 sd_create_scalar_port -sd_name ${sd_name} -port_name {ADC_IRQn} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {EMMC_STRB} -port_direction {IN}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_1_PAD} -port_direction {IN} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_PAD} -port_direction {IN} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_3_PAD} -port_direction {IN} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_4_PAD} -port_direction {IN} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_5_PAD} -port_direction {IN} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_7_PAD} -port_direction {IN} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_9_PAD} -port_direction {IN} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {PHY_INTn} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {REFCLK_N} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {REFCLK} -port_direction {IN}
@@ -38,14 +31,6 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {CSI1_PWND} -port_direction
 sd_create_scalar_port -sd_name ${sd_name} -port_name {CS} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {EMMC_CLK} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {EMMC_RSTN} -port_direction {OUT}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_10_PAD} -port_direction {OUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_11_PAD} -port_direction {OUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_12_PAD} -port_direction {OUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_13_PAD} -port_direction {OUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_14_PAD} -port_direction {OUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_15_PAD} -port_direction {OUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_6_PAD} -port_direction {OUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_8_PAD} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {M2_W_DISABLE1} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {M2_W_DISABLE2} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {ODT} -port_direction {OUT}
@@ -81,6 +66,7 @@ sd_create_bus_port -sd_name ${sd_name} -port_name {DQS_N} -port_direction {INOUT
 sd_create_bus_port -sd_name ${sd_name} -port_name {DQS} -port_direction {INOUT} -port_range {[3:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {DQ} -port_direction {INOUT} -port_range {[31:0]}
 sd_create_bus_port -sd_name ${sd_name} -port_name {EMMC_DATA} -port_direction {INOUT} -port_range {[7:0]}
+sd_create_bus_port -sd_name ${sd_name} -port_name {P8} -port_direction {INOUT} -port_range {[46:3]} -port_is_pad {1}
 sd_create_bus_port -sd_name ${sd_name} -port_name {P9} -port_direction {INOUT} -port_range {[31:11]} -port_is_pad {1}
 sd_create_bus_port -sd_name ${sd_name} -port_name {USB0_DATA} -port_direction {INOUT} -port_range {[7:0]}
 
@@ -217,23 +203,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:USB_OCn" "U
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:USB_STP" "USB0_STP" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:USER_BUTTON" "USER_BUTTON" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:VIO_ENABLE" "VIO_ENABLE" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_PLL_LOCK" "CLOCKS_AND_RESETS:GNSS_PLL_LOCK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_PRN_CLKx4" "CLOCKS_AND_RESETS:GNSS_OUT0_FABCLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_10_PAD" "GPIO_10_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_11_PAD" "GPIO_11_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_12_PAD" "GPIO_12_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_13_PAD" "GPIO_13_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_14_PAD" "GPIO_14_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_15_PAD" "GPIO_15_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_1_PAD" "GPIO_1_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_2_PAD" "GPIO_2_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_3_PAD" "GPIO_3_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_4_PAD" "GPIO_4_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_5_PAD" "GPIO_5_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_6_PAD" "GPIO_6_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_7_PAD" "GPIO_7_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_8_PAD" "GPIO_8_PAD" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GPIO_9_PAD" "GPIO_9_PAD" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:P9_14" "P9[14:14]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:P9_16" "P9[16:16]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:P9_PIN12" "P9[12:12]" }
@@ -258,6 +228,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:GPIO_2_M2F"
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:GPIO_2_OE_M2F" "CAPE:GPIO_OE" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:MSS_INT_F2M[47:8]" "CAPE:INT" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:USB_DATA" "USB0_DATA" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:P8" "P8" }
 
 # Add bus interface net connections
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:CAPE_APB_MTARGET" "CAPE:APB_SLAVE" }
@@ -266,5 +237,5 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:CAPE_APB_MT
 auto_promote_pad_pins -promote_all 1
 # Save the SmartDesign 
 save_smartdesign -sd_name ${sd_name}
-# Generate SmartDesign "GNSS_ACQ_C2640A84F0FFBCBB476F8"
+# Generate SmartDesign "GNSS_ACQ_A942CE3A95AD1C5FA84BF"
 generate_component -component_name ${sd_name}

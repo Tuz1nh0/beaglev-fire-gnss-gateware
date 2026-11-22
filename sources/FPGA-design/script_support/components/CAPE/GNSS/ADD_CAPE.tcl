@@ -186,5 +186,10 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"BVF_RISCV_SUBSYSTEM:MSS_INT_F2M
 sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {BVF_RISCV_SUBSYSTEM:MSS_INT_F2M[7:3]} -value {GND}
 sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {BVF_RISCV_SUBSYSTEM:MSS_INT_F2M[58:48]} -value {GND}
 
+#-------------------------------------------------------------------------------s
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_PRN_CLKx4" "CLOCKS_AND_RESETS:GNSS_OUT0_FABCLK" }
+#sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_PRN_CLKx4" "CLOCKS_AND_RESETS:GNSS_PLL_LOCK_0" }
+
+
 # Re-enable auto promotion of pins of type 'pad'
 auto_promote_pad_pins -promote_all 1

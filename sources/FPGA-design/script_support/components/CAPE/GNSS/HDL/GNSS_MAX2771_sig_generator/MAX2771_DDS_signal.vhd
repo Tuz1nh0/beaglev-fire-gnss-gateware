@@ -32,6 +32,9 @@ port (
     
     Doppler_step    : in std_logic_vector(5 downto 0);    
     SAT_int         : in std_logic_vector(4 downto 0);
+    
+ 	-- Debug
+    Debug_port		: out std_logic_vector(31 downto 0);
 
     I_OUT           : out std_logic_vector(1 downto 0);
     Q_OUT           : out std_logic_vector(1 downto 0);
@@ -43,6 +46,12 @@ architecture architecture_MAX2771_DDS_signal of MAX2771_DDS_signal is
     signal PRN_CLKx4    : std_logic;
     signal PRN_CLK      : std_logic;
     signal CA_CODE      : std_logic;
+    signal CA_RST       : std_logic;
+    signal LSFR_EN      : std_logic;
+    signal reset_sync   : std_logic_vector(1 downto 0);
+    signal I_SIG   	: std_logic_vector(1 downto 0);
+    signal Q_SIG    	: std_logic_vector(1 downto 0);
+    signal L1_debug	: std_logic_vector(2 downto 0);
     
     type DDS_signal  is array (0 to 1) of std_logic_vector(4 downto 0);
     signal DDS_out : DDS_signal;
@@ -92,6 +101,15 @@ architecture architecture_MAX2771_DDS_signal of MAX2771_DDS_signal is
         SINE            : out std_logic_vector(SINCOS_WIDTH-1 downto 0)
         );
     end component;
+    
+    component Flip_Flop_D is
+    port(	
+        D   :	in std_logic;
+        rst :	in std_logic;
+        clk :	in std_logic;
+        Q   :	out std_logic
+    );
+    end component;
 
 begin
     -- architecture body
@@ -122,12 +140,12 @@ begin
 	U_CA_CODE: L1_CA_generator 
 	   port map(
 	     clk            => PRN_CLK,
-	     rst            => not NRST,
+	     rst            => CA_RST,
 	     PRN            => CA_CODE,
 	     ENABLE         => enable,
-	     valid_out      => open,
-	     epoch          => open,
-	     epoch_advce    => open,
+	     valid_out      => L1_debug(2),
+	     epoch          => L1_debug(1),
+	     epoch_advce    => L1_debug(0),
 	     SAT            => SAT_int
 	   );
     
@@ -146,26 +164,40 @@ begin
             SINE        => DDS_out(1)
     );
     
-    process (PRN_CLKx4, NRST, enable, PLL_LOCK)
+    process (PRN_CLKx4)
     begin
         if rising_edge(PRN_CLKx4) then
             if NRST = '0' then
-                I_OUT <= "00";
-                Q_OUT <= "00";
+                I_SIG <= "00";
+                Q_SIG <= "00";
             elsif enable = '1' and PLL_LOCK = '1' then
-                I_OUT(1) <= DDS_out(0)(4) xor CA_CODE;
-                I_OUT(0) <= (DDS_out(0)(4) xor DDS_out(0)(3)) or (DDS_out(0)(4) xor DDS_out(0)(2));
+                --I_OUT(1) <= DDS_out(0)(4) xor CA_CODE;
+                --I_SIG(1) <= CA_CODE;
+                --I_SIG(0) <= (DDS_out(0)(4) xor DDS_out(0)(3)) or (DDS_out(0)(4) xor DDS_out(0)(2));
                 
-                Q_OUT(1) <= DDS_out(1)(4) xor CA_CODE;
-                Q_OUT(0) <= (DDS_out(1)(4) xor DDS_out(1)(3)) or (DDS_out(1)(4) xor DDS_out(1)(2)); 
+                --Q_SIG(1) <= DDS_out(1)(4) xor CA_CODE;
+                --Q_SIG(0) <= (DDS_out(1)(4) xor DDS_out(1)(3)) or (DDS_out(1)(4) xor DDS_out(1)(2)); 
+                I_SIG <= "10";
+                Q_SIG <= "01";
             end if;                    
         end if;
     end process;
     
-    VALID_OUT <= PRN_CLKx4 when enable = '1'
-                else '0';
-
+    VALID_OUT <= PRN_CLK;
+                
+    LSFR_EN <= NRST and PLL_LOCK and enable;
+    U1_RST: Flip_Flop_D port map (clk => PRN_CLK, rst => NRST, D => LSFR_EN, Q => reset_sync(0));
+    U2_RST: Flip_Flop_D port map (clk => PRN_CLK, rst => NRST, D => reset_sync(0), Q => reset_sync(1));
+    CA_RST <= not(reset_sync(0) or reset_sync(1));
+    
+    I_OUT <= I_SIG;
+    Q_OUT <= Q_SIG;
+    
+    -- Debug
+    Debug_port <= "000000000000" & PRN_CLK & NRST & CA_RST & CA_CODE & enable & L1_debug & I_SIG & Q_SIG & Doppler_step & reset_sync; 
     
 end architecture_MAX2771_DDS_signal;
+
+
 
 

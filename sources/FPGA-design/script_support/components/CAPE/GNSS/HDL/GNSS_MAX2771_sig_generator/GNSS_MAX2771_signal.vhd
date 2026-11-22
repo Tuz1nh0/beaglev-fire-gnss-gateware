@@ -51,6 +51,7 @@ architecture architecture_GNSS_MAX2771_signal of GNSS_MAX2771_signal is
 	signal enable_sig   : std_logic; 
 	signal doppler_sig  : std_logic_vector(5 downto 0);
 	signal sat_id_sig   : std_logic_vector(4 downto 0);
+	signal debug_sig   : std_logic_vector(31 downto 0);
 
     component MAX2771_APB_Wrapper 
     port (
@@ -71,6 +72,7 @@ architecture architecture_GNSS_MAX2771_signal of GNSS_MAX2771_signal is
         PSLVERR : out std_logic;
         
         -- Interface MAX2771
+        Debug_port	: in std_logic_vector(31 downto 0);
         enable          : out std_logic;
         Doppler_step    : out std_logic_vector(5 downto 0);    
         SAT_int         : out std_logic_vector(4 downto 0)
@@ -89,6 +91,8 @@ architecture architecture_GNSS_MAX2771_signal of GNSS_MAX2771_signal is
         
         Doppler_step    : in std_logic_vector(5 downto 0);    
         SAT_int         : in std_logic_vector(4 downto 0);
+        
+            Debug_port		: out std_logic_vector(31 downto 0);
 
         I_OUT           : out std_logic_vector(1 downto 0);
         Q_OUT           : out std_logic_vector(1 downto 0);
@@ -112,6 +116,7 @@ begin
             PRDATA          => PRDATA,
             PREADY          => PREADY,
             PSLVERR         => PSLVERR,
+            Debug_port	=> debug_sig,
             enable          => enable_sig,
             Doppler_step    => doppler_sig,
             SAT_int         => sat_id_sig
@@ -126,6 +131,7 @@ begin
             enable          => enable_sig,
             Doppler_step    => doppler_sig,
             SAT_int         => sat_id_sig,
+            Debug_port		=> debug_sig,
             I_OUT           => I_OUT,
             Q_OUT           => Q_OUT,
             VALID_OUT       => VALID_OUT

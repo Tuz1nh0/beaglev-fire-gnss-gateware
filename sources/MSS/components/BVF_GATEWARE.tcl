@@ -267,9 +267,9 @@ source script_support/components/M2/$m2_option/ADD_M2_INTERFACE.tcl
 source script_support/components/MIPI_CSI/$mipi_csi_option/ADD_MIPI_CSI_INTERFACE.tcl
 source script_support/components/APU/$apu_option/ADD_APU.tcl 
 
-#-------------------------------------------------------------------------------
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_PLL_LOCK" "CLOCKS_AND_RESETS:GNSS_PLL_LOCK_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_PRN_CLKx4" "CLOCKS_AND_RESETS:GNSS_OUT0_FABCLK" }
+#-------------------------------------------------------------------------------s
+#sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_PRN_CLKx4" "CLOCKS_AND_RESETS:GNSS_OUT0_FABCLK" }
+#sd_connect_pins -sd_name ${sd_name} -pin_names {"CAPE:GNSS_PLL_LOCK" "CLOCKS_AND_RESETS:GNSS_PLL_LOCK_0" }
 
 # Re-enable auto promotion of pins of type 'pad'
 auto_promote_pad_pins -promote_all 1
