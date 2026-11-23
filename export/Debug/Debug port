@@ -1,0 +1,5 @@
+Debug_port <= 	PRN_CLK &	NRST 	&	CA_RST 	&	CA_CODE	& 	enable 	& 	L1_debug 	& 	I_SIG 	& 	Q_SIG 	& 	Doppler_step 	& 	reset_sync 
+000DCE03   <=	1	&	1	&	0	&	1	&	1	&	100		&	01	&	11	&	000000		&	11
+0005CE03   <=	0	&	1	&	0	&	1	&	1	&	100		&	01	&	11	&	000000		&	11
+0004CE03   <=	0	&	1	&	0	&	0	&	1	&	100		&	01	&	11	&	000000		&	11
+000CCE03   <=	1	&	1	&	0	&	0	&	1	&	100		&	01	&	11	&	000000		&	11
