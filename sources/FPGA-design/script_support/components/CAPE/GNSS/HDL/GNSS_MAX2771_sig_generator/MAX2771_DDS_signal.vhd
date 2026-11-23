@@ -171,14 +171,14 @@ begin
                 I_SIG <= "00";
                 Q_SIG <= "00";
             elsif enable = '1' and PLL_LOCK = '1' then
-                --I_OUT(1) <= DDS_out(0)(4) xor CA_CODE;
-                --I_SIG(1) <= CA_CODE;
-                --I_SIG(0) <= (DDS_out(0)(4) xor DDS_out(0)(3)) or (DDS_out(0)(4) xor DDS_out(0)(2));
+                I_SIG(1) <= DDS_out(0)(4) xor CA_CODE;
+                I_SIG(0) <= (DDS_out(0)(4) xor DDS_out(0)(3)) or (DDS_out(0)(4) xor DDS_out(0)(2));
                 
-                --Q_SIG(1) <= DDS_out(1)(4) xor CA_CODE;
-                --Q_SIG(0) <= (DDS_out(1)(4) xor DDS_out(1)(3)) or (DDS_out(1)(4) xor DDS_out(1)(2)); 
-                I_SIG <= "10";
-                Q_SIG <= "01";
+                Q_SIG(1) <= DDS_out(1)(4) xor CA_CODE;
+                Q_SIG(0) <= (DDS_out(1)(4) xor DDS_out(1)(3)) or (DDS_out(1)(4) xor DDS_out(1)(2)); 
+                
+                --I_SIG <= "10";
+                --Q_SIG <= "01";
             end if;                    
         end if;
     end process;
@@ -197,6 +197,7 @@ begin
     Debug_port <= "000000000000" & PRN_CLK & NRST & CA_RST & CA_CODE & enable & L1_debug & I_SIG & Q_SIG & Doppler_step & reset_sync; 
     
 end architecture_MAX2771_DDS_signal;
+
 
 
 

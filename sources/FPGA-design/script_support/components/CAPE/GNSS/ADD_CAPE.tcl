@@ -8,7 +8,8 @@ puts "======== Add cape option: DEFAULT ========"
 ::safe_source script_support/components/CAPE/$cape_option/TCL_files/CoreAPB3_CAPE_config.tcl
 #::safe_source script_support/components/CAPE/shared/CoreGPIO_P8_UPPER.tcl
 #::safe_source script_support/components/CAPE/shared/P8_GPIO_UPPER.tcl
-::safe_source script_support/components/CAPE/$cape_option/TCL_files/P8_GPIO_UPPER.tcl
+::safe_source script_support/components/CAPE/$cape_option/TCL_files/GNSS_P8_Upper.tcl
+::safe_source script_support/components/CAPE/$cape_option/TCL_files/P8_GPIO_UPPER_config.tcl
 ::safe_source script_support/components/CAPE/shared/CoreGPIO_P9.tcl
 ::safe_source script_support/components/CAPE/shared/P9_GPIO.tcl
 ::safe_source script_support/components/CAPE/shared/CAPE_DEFAULT_GPIOS.tcl
@@ -24,7 +25,6 @@ puts "======== Add cape option: DEFAULT ========"
 ::safe_source script_support/components/CAPE/$cape_option/TCL_files/ACQ_complex_multiplier_C2.tcl
 ::safe_source script_support/components/CAPE/$cape_option/TCL_files/ACQ_COREFFT_C2.tcl
 ::safe_source script_support/components/CAPE/$cape_option/TCL_files/ACQ_COREFFT_C4.tcl
-::safe_source script_support/components/CAPE/$cape_option/TCL_files/GNSS_P8_Upper.tcl
 ::safe_source script_support/components/CAPE/$cape_option/GNSS_MAX2771_signal_config.tcl
 ::safe_source script_support/components/CAPE/$cape_option/ACQ_MOD_GPIO_IN_config.tcl
 ::safe_source script_support/components/CAPE/$cape_option/Acquisition_Core_config.tcl
